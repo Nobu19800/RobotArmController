@@ -24,7 +24,7 @@
 #include "ManipulatorCommonInterface_CommonSVC_impl.h"
 #include "ManipulatorCommonInterface_MiddleLevelSVC_impl.h"
 
-#include "ControlJoint.h"
+
 #include "RobotArm.h"
 
 // </rtc-template>
@@ -259,8 +259,7 @@ class armcontroller
    */
   double m_init_gripperPos;
 
-  int I2C_channel;
-  int I2C_address;
+  
   // </rtc-template>
 
   // DataInPort declaration
@@ -275,6 +274,11 @@ class armcontroller
   /*!
    */
   OutPort<TimedDoubleSeq> m_jposOut;
+
+  TimedDoubleSeq m_mpos;
+  /*!
+   */
+  OutPort<TimedDoubleSeq> m_mposOut;
   
   // </rtc-template>
 
@@ -304,7 +308,7 @@ class armcontroller
   // <rtc-template block="consumer_declare">
   
   // </rtc-template>
-  ControlJoint *m_cj;
+  
   RobotArm *m_ra;
   
 

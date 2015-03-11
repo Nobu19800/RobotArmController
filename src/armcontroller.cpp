@@ -30,18 +30,12 @@ static const char* armcontroller_spec[] =
     "conf.default.init_angel3", "-0.5",
     "conf.default.init_angel4", "0",
     "conf.default.init_gripperPos", "0",
-    "conf.default.I2C_address", "8",
-    "conf.default.I2C_channel", "1",
     // Widget
     "conf.__widget__.init_angle1", "text",
     "conf.__widget__.init_angle2", "text",
     "conf.__widget__.init_angle3", "text",
     "conf.__widget__.init_angle4", "text",
     "conf.__widget__.init_gripperPos", "text",
-    "conf.__widget__.I2C_address", "spin",
-    "conf.__widget__.I2C_channel", "radio",
-    "conf.__constraints__.I2C_address", "0<=x<=255",
-    "conf.__constraints__.I2C_channel", "(1,6)",
     // Constraints
     ""
   };
@@ -55,6 +49,7 @@ armcontroller::armcontroller(RTC::Manager* manager)
     // <rtc-template block="initializer">
   : RTC::DataFlowComponentBase(manager),
     m_jposOut("jpos", m_jpos),
+    m_mposOut("mpos", m_mpos),
     m_ManipulatorCommonInterface_CommonPort("ManipulatorCommonInterface_Common"),
     m_ManipulatorCommonInterface_MiddlePort("ManipulatorCommonInterface_Middle")
 
@@ -79,10 +74,11 @@ RTC::ReturnCode_t armcontroller::onInitialize()
   
   // Set OutPort buffer
   addOutPort("jpos", m_jposOut);
+  addOutPort("mpos", m_mposOut);
 
   m_ra = new RobotArm();
   //m_ra->setOffset(0, PI/2*0.999, 0, 0);
-  m_cj = NULL;
+  
 
   m_ManipulatorCommonInterface_Common = new ManipulatorCommonInterface_CommonSVC_impl(m_ra);
   m_ManipulatorCommonInterface_Middle = new ManipulatorCommonInterface_MiddleSVC_impl(m_ra);
@@ -106,8 +102,6 @@ RTC::ReturnCode_t armcontroller::onInitialize()
   bindParameter("init_angle3", m_init_angle3, "-0.5");
   bindParameter("init_angle4", m_init_angle4, "0");
   bindParameter("init_gripperPos", m_init_gripperPos, "0");
-  bindParameter("I2C_address", I2C_address, "8");
-  bindParameter("I2C_channel", I2C_channel, "1");
   
   // </rtc-template>
   return RTC::RTC_OK;
@@ -130,8 +124,7 @@ RTC::ReturnCode_t armcontroller::onStartup(RTC::UniqueId ec_id)
 
 RTC::ReturnCode_t armcontroller::onShutdown(RTC::UniqueId ec_id)
 {
-  if(m_cj)
-  	delete m_cj;
+  
 
   return RTC::RTC_OK;
 }
@@ -139,10 +132,7 @@ RTC::ReturnCode_t armcontroller::onShutdown(RTC::UniqueId ec_id)
 
 RTC::ReturnCode_t armcontroller::onActivated(RTC::UniqueId ec_id)
 {
-  if(m_cj == NULL)
-  {
-	m_cj = new ControlJoint(I2C_address,I2C_channel,m_ra);
-  }
+  
   //m_ra->setOffset(m_init_angle1, m_init_angle2, m_init_angle3, m_init_angle4);
   
 
@@ -170,12 +160,18 @@ RTC::ReturnCode_t armcontroller::onExecute(RTC::UniqueId ec_id)
   double trate = ecs[0]->get_rate();
   m_ra->update(1/trate);
   
-  m_cj->updateJointPos();
+  
 
   m_jpos.data.length(m_ra->axisNum);
   for(int i=0;i < m_ra->axisNum;i++)
 	m_jpos.data[i] = m_ra->theta[i];
   m_jposOut.write();
+
+  double *mp = m_ra->getMotorPosition();
+  m_mpos.data.length(m_ra->axisNum);
+  for(int i=0;i < m_ra->axisNum;i++)
+	m_mpos.data[i] = mp[i];
+  m_mposOut.write();
 
   return RTC::RTC_OK;
 }

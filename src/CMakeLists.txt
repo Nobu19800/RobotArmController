@@ -1,4 +1,4 @@
-set(comp_srcs armcontroller.cpp ManipulatorCommonInterface_CommonSVC_impl.cpp ManipulatorCommonInterface_MiddleLevelSVC_impl.cpp  RobotArm.cpp ControlJoint.cpp )
+set(comp_srcs armcontroller.cpp ManipulatorCommonInterface_CommonSVC_impl.cpp ManipulatorCommonInterface_MiddleLevelSVC_impl.cpp  RobotArm.cpp )
 set(standalone_srcs armcontrollerComp.cpp)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
@@ -17,10 +17,10 @@ link_directories(${OMNIORB_LIBRARY_DIRS})
 add_library(${PROJECT_NAME_LOWER} ${LIB_TYPE} ${comp_srcs} ${ALL_IDL_SRCS})
 set_source_files_properties(${ALL_IDL_SRCS} PROPERTIES GENERATED 1)
 add_dependencies(${PROJECT_NAME_LOWER} ALL_IDL_TGT)
-target_link_libraries(${PROJECT_NAME_LOWER} ${OPENRTM_LIBRARIES} -lmraa)
+target_link_libraries(${PROJECT_NAME_LOWER} ${OPENRTM_LIBRARIES})
 
 add_executable(${PROJECT_NAME_LOWER}comp ${standalone_srcs})
-target_link_libraries(${PROJECT_NAME_LOWER}comp ${PROJECT_NAME_LOWER} -lmraa)
+target_link_libraries(${PROJECT_NAME_LOWER}comp ${PROJECT_NAME_LOWER})
 
 install(TARGETS ${PROJECT_NAME_LOWER} ${PROJECT_NAME_LOWER}comp
     EXPORT ${PROJECT_NAME_LOWER}
