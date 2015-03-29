@@ -200,12 +200,18 @@ JARA_ARM::RETURN_ID *ManipulatorCommonInterface_MiddleSVC_impl::setControlPointO
 JARA_ARM::RETURN_ID *ManipulatorCommonInterface_MiddleSVC_impl::setMaxSpeedCartesian(const JARA_ARM::CartesianSpeed& speed)
 {
 	JARA_ARM::RETURN_ID_var result = new JARA_ARM::RETURN_ID();
+	m_robotArm->MaxSpeedCartesianTrans = speed.translation;
+	m_robotArm->MaxSpeedCartesianRot = speed.rotation;
 	return result._retn();
 }
 
 JARA_ARM::RETURN_ID *ManipulatorCommonInterface_MiddleSVC_impl::setMaxSpeedJoint(const JARA_ARM::DoubleSeq& speed)
 {
 	JARA_ARM::RETURN_ID_var result = new JARA_ARM::RETURN_ID();
+	for(int i=0;i < 4;i++)
+	{
+		m_robotArm->MaxSpeedJoint[i] = speed[i];
+	}
 	return result._retn();
 }
 

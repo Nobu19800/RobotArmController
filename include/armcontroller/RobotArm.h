@@ -31,8 +31,8 @@ public:
 	void setPoint(double t, Vector3d t_p, double the);
 	void setJointPos(double t, double *t_p);
 
-	void setStartPoint(Vector3d s_p, double the, double speed);
-	void setStartJointPos(double *s_p, double speed);
+	void setStartPoint(Vector3d s_p, double the, double maxSpeedCartesianTrans, double maxSpeedCartesianRot, double minTime);
+	void setStartJointPos(double *s_p, double *maxSpeedJoint, double minTime);
 
 	
 };
@@ -123,8 +123,8 @@ public:
 	int cmdCycle;
 	bool isGripper;
 
-	double speedPoint;
-	double speedJointPos;
+	//double speedPoint;
+	//double speedJointPos;
 
 	void setHandJointPosition(double hjp);
 	void setStartPos(double j1, double j2, double j3, double j4);
@@ -132,6 +132,9 @@ public:
 
 	double* getMotorPosition();
 	double calcVel(double target_theta, double start_theta, double end_time, double time, double angle);
+
+	double MaxSpeedJoint[4], MaxSpeedCartesianTrans, MaxSpeedCartesianRot;
+	double MinTime;
 };
 
 
