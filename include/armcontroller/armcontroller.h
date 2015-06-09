@@ -1,14 +1,14 @@
 // -*- C++ -*-
 /*!
- * @file  armcontroller.h
+ * @file  ArmController.h
  * @brief Control Manipulator With Edison
  * @date  $Date$
  *
  * $Id$
  */
 
-#ifndef armcontroller_H
-#define armcontroller_H
+#ifndef ArmController_H
+#define ArmController_H
 
 #include <rtm/Manager.h>
 #include <rtm/DataFlowComponentBase.h>
@@ -37,11 +37,11 @@
 using namespace RTC;
 
 /*!
- * @class armcontroller
+ * @class ArmController
  * @brief Control Manipulator With Edison
  *
  */
-class armcontroller
+class ArmController
   : public RTC::DataFlowComponentBase
 {
  public:
@@ -49,12 +49,12 @@ class armcontroller
    * @brief constructor
    * @param manager Maneger Object
    */
-  armcontroller(RTC::Manager* manager);
+  ArmController(RTC::Manager* manager);
 
   /*!
    * @brief destructor
    */
-  ~armcontroller();
+  ~ArmController();
 
   // <rtc-template block="public_attribute">
   
@@ -326,7 +326,7 @@ class armcontroller
 
 extern "C"
 {
-  DLL_EXPORT void armcontrollerInit(RTC::Manager* manager);
+  DLL_EXPORT void ArmControllerInit(RTC::Manager* manager);
 };
 
-#endif // armcontroller_H
+#endif // ArmController_H

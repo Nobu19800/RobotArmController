@@ -7,14 +7,14 @@
  * $Id$
  */
 
-#include "armcontroller.h"
+#include "ArmController.h"
 
 // Module specification
 // <rtc-template block="module_spec">
-static const char* armcontroller_spec[] =
+static const char* ArmController_spec[] =
   {
-    "implementation_id", "armcontroller",
-    "type_name",         "armcontroller",
+    "implementation_id", "ArmController",
+    "type_name",         "ArmController",
     "description",       "Control Manipulator With Edison",
     "version",           "1.0.0",
     "vendor",            "Miyamoto Nobuhiko",
@@ -45,7 +45,7 @@ static const char* armcontroller_spec[] =
  * @brief constructor
  * @param manager Maneger Object
  */
-armcontroller::armcontroller(RTC::Manager* manager)
+ArmController::ArmController(RTC::Manager* manager)
     // <rtc-template block="initializer">
   : RTC::DataFlowComponentBase(manager),
     m_jposOut("jpos", m_jpos),
@@ -60,13 +60,13 @@ armcontroller::armcontroller(RTC::Manager* manager)
 /*!
  * @brief destructor
  */
-armcontroller::~armcontroller()
+ArmController::~ArmController()
 {
 }
 
 
 
-RTC::ReturnCode_t armcontroller::onInitialize()
+RTC::ReturnCode_t ArmController::onInitialize()
 {
   // Registration: InPort/OutPort/Service
   // <rtc-template block="registration">
@@ -108,21 +108,21 @@ RTC::ReturnCode_t armcontroller::onInitialize()
 }
 
 /*
-RTC::ReturnCode_t armcontroller::onFinalize()
+RTC::ReturnCode_t ArmController::onFinalize()
 {
   return RTC::RTC_OK;
 }
 */
 
 /*
-RTC::ReturnCode_t armcontroller::onStartup(RTC::UniqueId ec_id)
+RTC::ReturnCode_t ArmController::onStartup(RTC::UniqueId ec_id)
 {
   return RTC::RTC_OK;
 }
 */
 
 
-RTC::ReturnCode_t armcontroller::onShutdown(RTC::UniqueId ec_id)
+RTC::ReturnCode_t ArmController::onShutdown(RTC::UniqueId ec_id)
 {
   
 
@@ -130,7 +130,7 @@ RTC::ReturnCode_t armcontroller::onShutdown(RTC::UniqueId ec_id)
 }
 
 
-RTC::ReturnCode_t armcontroller::onActivated(RTC::UniqueId ec_id)
+RTC::ReturnCode_t ArmController::onActivated(RTC::UniqueId ec_id)
 {
   
   //m_ra->setOffset(m_init_angle1, m_init_angle2, m_init_angle3, m_init_angle4);
@@ -142,13 +142,13 @@ RTC::ReturnCode_t armcontroller::onActivated(RTC::UniqueId ec_id)
 }
 
 
-RTC::ReturnCode_t armcontroller::onDeactivated(RTC::UniqueId ec_id)
+RTC::ReturnCode_t ArmController::onDeactivated(RTC::UniqueId ec_id)
 {
   return RTC::RTC_OK;
 }
 
 
-RTC::ReturnCode_t armcontroller::onExecute(RTC::UniqueId ec_id)
+RTC::ReturnCode_t ArmController::onExecute(RTC::UniqueId ec_id)
 {
   
   if(m_ra->stopFalg)
@@ -177,33 +177,33 @@ RTC::ReturnCode_t armcontroller::onExecute(RTC::UniqueId ec_id)
 }
 
 /*
-RTC::ReturnCode_t armcontroller::onAborting(RTC::UniqueId ec_id)
+RTC::ReturnCode_t ArmController::onAborting(RTC::UniqueId ec_id)
 {
   return RTC::RTC_OK;
 }
 */
 
 
-RTC::ReturnCode_t armcontroller::onError(RTC::UniqueId ec_id)
+RTC::ReturnCode_t ArmController::onError(RTC::UniqueId ec_id)
 {
   return RTC::RTC_OK;
 }
 
 
-RTC::ReturnCode_t armcontroller::onReset(RTC::UniqueId ec_id)
+RTC::ReturnCode_t ArmController::onReset(RTC::UniqueId ec_id)
 {
   return RTC::RTC_OK;
 }
 
 /*
-RTC::ReturnCode_t armcontroller::onStateUpdate(RTC::UniqueId ec_id)
+RTC::ReturnCode_t ArmController::onStateUpdate(RTC::UniqueId ec_id)
 {
   return RTC::RTC_OK;
 }
 */
 
 /*
-RTC::ReturnCode_t armcontroller::onRateChanged(RTC::UniqueId ec_id)
+RTC::ReturnCode_t ArmController::onRateChanged(RTC::UniqueId ec_id)
 {
   return RTC::RTC_OK;
 }
@@ -214,12 +214,12 @@ RTC::ReturnCode_t armcontroller::onRateChanged(RTC::UniqueId ec_id)
 extern "C"
 {
  
-  void armcontrollerInit(RTC::Manager* manager)
+  void ArmControllerInit(RTC::Manager* manager)
   {
-    coil::Properties profile(armcontroller_spec);
+    coil::Properties profile(ArmController_spec);
     manager->registerFactory(profile,
-                             RTC::Create<armcontroller>,
-                             RTC::Delete<armcontroller>);
+                             RTC::Create<ArmController>,
+                             RTC::Delete<ArmController>);
   }
   
 };

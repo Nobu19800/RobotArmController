@@ -1,4 +1,4 @@
-armcontrollerName - English
+ArmControllerName - English
 ========================
 
 .. toctree::
@@ -19,7 +19,7 @@ For a full list of classes and functions, see the `API documentation`_.
 Requirements
 ============
 
-armcontroller uses the `CMake build system`. You will need at least version
+ArmController uses the `CMake build system`. You will need at least version
 2.8 to be able to build the component.
 
 .. _`CMAke build system`:
@@ -43,24 +43,24 @@ recommended method of installation in Windows.
   to take effect before using the component.
 
 The component can be launched by double-clicking the
-``armcontrollerComp`` executable. The ``armcontroller`` library
+``ArmControllerComp`` executable. The ``ArmController`` library
 is available for loading into a manager, using the initialisation function
-``armcontrollerInit``.
+``ArmControllerInit``.
 
 From source
 -----------
 
-Follow these steps to install armcontroller from source in any operating
+Follow these steps to install ArmController from source in any operating
 system:
 
 - Download the source, either from the repository or a source archive,
   and extract it somewhere::
 
-    tar -xvzf armcontroller-1.0.0.tar.gz
+    tar -xvzf ArmController-1.0.0.tar.gz
 
 - Change to the directory containing the extracted source::
 
-    cd armcontroller-1.0.0
+    cd ArmController-1.0.0
 
 - Create a directory called ``build``::
 
@@ -91,10 +91,10 @@ system:
 The component is now ready for use. See the next section for instructions on
 configuring the component.
 
-armcontroller can be launched in stand-alone mode by executing the
-``armcontrollerComp`` executable (installed into ``${prefix}/components/bin``).
-Alternatively, ``libarmcontroller.so`` can be loaded into a manager, using the
-initialisation function ``armcontrollerInit``. This shared object can be found in
+ArmController can be launched in stand-alone mode by executing the
+``ArmControllerComp`` executable (installed into ``${prefix}/components/bin``).
+Alternatively, ``libArmController.so`` can be loaded into a manager, using the
+initialisation function ``ArmControllerInit``. This shared object can be found in
 ``${prefix}/components/lib`` or ``${prefix}/components/lib64``.
 
 
@@ -125,7 +125,7 @@ Examples
 ========
 
 An example configuration file is provided in the
-``${prefix}/components/share/armcontroller/examples/conf/`` directory.
+``${prefix}/components/share/ArmController/examples/conf/`` directory.
 
 Changelog
 =========

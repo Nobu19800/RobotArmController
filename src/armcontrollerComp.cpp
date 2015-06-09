@@ -1,6 +1,6 @@
 // -*- C++ -*-
 /*!
- * @file armcontrollerComp.cpp
+ * @file ArmControllerComp.cpp
  * @brief Standalone component
  * @date $Date$
  *
@@ -11,16 +11,16 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
-#include "armcontroller.h"
+#include "ArmController.h"
 
 
 void MyModuleInit(RTC::Manager* manager)
 {
-  armcontrollerInit(manager);
+  ArmControllerInit(manager);
   RTC::RtcBase* comp;
 
   // Create a component
-  comp = manager->createComponent("armcontroller");
+  comp = manager->createComponent("ArmController");
 
   if (comp==NULL)
   {

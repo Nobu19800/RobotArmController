@@ -1,4 +1,4 @@
-armcontroller - 日本語
+ArmController - 日本語
 =======================
 
 
@@ -13,9 +13,9 @@ armcontroller - 日本語
 条件
 ====
 
-armcontrollerはOpenRTM-aist 1.0.0以上のC++版が必要です。
+ArmControllerはOpenRTM-aist 1.0.0以上のC++版が必要です。
 
-armcontrollerは CMake_ を使います。CMake 2.8以上が必要です。
+ArmControllerは CMake_ を使います。CMake 2.8以上が必要です。
 
 .. _CMAke:
    http://www.cmake.org
@@ -36,8 +36,8 @@ Windowsのユーザはインストーラパッケージを使用してコンポ�
 - 環境変数の変更を適用するため、コンポーネントを使用する前にコンピューターを
   再起動する必要があるかもしれません。
 
-armcontrollerは ``armcontrollerComp`` の実行をダブルクリックして実行することが
-できます。あるいは、 ``armcontroller`` を初期化関数の ``armcontrollerInit`` を利用して、
+ArmControllerは ``ArmControllerComp`` の実行をダブルクリックして実行することが
+できます。あるいは、 ``ArmController`` を初期化関数の ``ArmControllerInit`` を利用して、
 マネージャにロードすることができます。
 
 ソースから
@@ -47,11 +47,11 @@ armcontrollerは ``armcontrollerComp`` の実行をダブルクリックして�
 
 - ソースをダウンロードして解凍してください::
 
-    tar -xvzf armcontroller-1.0.0.tar.gz
+    tar -xvzf ArmController-1.0.0.tar.gz
 
 - 解凍されたフォルダに入ってください::
 
-    cd armcontroller-1.0.0
+    cd ArmController-1.0.0
 
 - ``build`` フォルダを作ってください::
 
@@ -82,9 +82,9 @@ armcontrollerは ``armcontrollerComp`` の実行をダブルクリックして�
 ここまでで、コンポーネントが使えるようになりました。コンフィグレーションは次のセクションを
 参照してください。
 
-armcontrollerは ``armcontrollerComp`` を実行（ ``${prefix}/components/bin`` に
+ArmControllerは ``ArmControllerComp`` を実行（ ``${prefix}/components/bin`` に
 インストールされます）することでスタンドアローンモードで実行することができます。
-あるいは、 ``libarmcontroller.so`` を初期化関数の ``armcontrollerInit`` を利用して、
+あるいは、 ``libArmController.so`` を初期化関数の ``ArmControllerInit`` を利用して、
 マネージャにロードすることができます。このライブラリは ``${prefix}/components/lib`` 
 または ``${prefix}/components/lib64`` にインストールされます。
 
@@ -116,7 +116,7 @@ ManipulatorCommonInterface_Middle ServicePort JARA_ARM::ManipulatorCommonInterfa
 例
 ==
 
-例のrtc.confファイルは ``${prefix}/components/share/armcontroller/examples/conf/``
+例のrtc.confファイルは ``${prefix}/components/share/ArmController/examples/conf/``
 フォルダにインストールされています。
 
 Changelog

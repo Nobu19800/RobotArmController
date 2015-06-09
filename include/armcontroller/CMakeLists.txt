@@ -1,4 +1,5 @@
-set(hdrs armcontroller.h
+set(hdrs ArmController.h
+    PARENT_SCOPE
     ManipulatorCommonInterface_CommonSVC_impl.h
     ManipulatorCommonInterface_MiddleLevelSVC_impl.h
     )
