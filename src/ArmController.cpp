@@ -18,7 +18,7 @@ static const char* ArmController_spec[] =
     "description",       "Control Manipulator With Edison",
     "version",           "1.0.0",
     "vendor",            "Miyamoto Nobuhiko",
-    "category",          "Manipulator",
+    "category",          "TES",
     "activity_type",     "PERIODIC",
     "kind",              "DataFlowComponent",
     "max_instance",      "1",

@@ -1,5 +1,32 @@
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <fstream>
 #include "RobotArm.h"
+
+#define ArmLength0 0.05
+#define ArmLength1 0.05
+#define ArmLength2 0.14
+#define ArmLength3 0.152
+
+#define HandLength 0.01
+#define FingerLength 0.02
+
+#define ArmMath0 0.1
+#define ArmMath1 0.1
+#define ArmMath2 0.1
+#define ArmMath3 0.1
+
+#define HandMath 0.1
+#define FingerMath 0.01
+
+
+
+#define ArmWidth 0.01
+#define FingerWidth 0.005
+#define ArmHeight 0.01
+#define FingerHeight 0.005
+#define HandRadius 0.016
+
 
 //std::ofstream ofs( "test.txt" );
 
@@ -101,23 +128,23 @@ RobotArm::RobotArm()
 {
 	jl = new Vector3d[4];
 	pl = new Vector3d[4];
-	l[0] = 0.05;
-	l[1] = 0.05;
-	l[2] = 0.15;
-	l[3] = 0.15;
-	lh = 0.01;
-	lf = 0.02;
-	m[0] = 0.1;
-	m[1] = 0.1;
-	m[2] = 0.1;
-	m[3] = 0.1;
-	mh = 0.1;
-	mf = 0.1;
-	wi = 0.01;
-	wf = 0.005;
-	hi = 0.01;
-	hf = 0.005;
-	rh = 0.01;
+	l[0] = ArmLength0;
+	l[1] = ArmLength1;
+	l[2] = ArmLength2;
+	l[3] = ArmLength3;
+	lh = HandLength;
+	lf = FingerLength;
+	m[0] = ArmMath0;
+	m[1] = ArmMath1;
+	m[2] = ArmMath2;
+	m[3] = ArmMath3;
+	mh = HandMath;
+	mf = FingerMath;
+	wi = ArmWidth;
+	wf = FingerWidth;
+	hi = ArmHeight;
+	hf = FingerHeight;
+	rh = HandRadius;
 	jl[0](0) = 0;
 	jl[0](1) = 0;
 	jl[0](2) = 0;
@@ -195,15 +222,15 @@ RobotArm::RobotArm()
 	
 
 
-	softUpperLimitJoint[0] = PI*90/180;
-	softUpperLimitJoint[1] = PI*105/180;
-	softUpperLimitJoint[2] = PI*90/180;
-	softUpperLimitJoint[3] = PI/2;
+	softUpperLimitJoint[0] = M_PI*90/180;
+	softUpperLimitJoint[1] = M_PI*105/180;
+	softUpperLimitJoint[2] = M_PI*90/180;
+	softUpperLimitJoint[3] = M_PI/2;
 
-	softLowerLimitJoint[0] = -PI*90/180;
+	softLowerLimitJoint[0] = -M_PI*90/180;
 	softLowerLimitJoint[1] = -0.001;
 	softLowerLimitJoint[2] = -0.001;
-	softLowerLimitJoint[3] = -PI/2;
+	softLowerLimitJoint[3] = -M_PI/2;
 
 	serbo = true;
 
@@ -225,10 +252,10 @@ RobotArm::RobotArm()
 
 	MinTime = dt;
 
-	jointOffset[0] = PI*90/180;
-	jointOffset[1] = PI*20/180;
-	jointOffset[2] = PI*105/180;
-	jointOffset[3] = PI/2;
+	jointOffset[0] = M_PI*90/180;
+	jointOffset[1] = M_PI*20/180;
+	jointOffset[2] = M_PI*105/180;
+	jointOffset[3] = M_PI/2;
 	
 
 }
@@ -328,16 +355,16 @@ void RobotArm::update(double st)
 				return;
 			}
 
-			double A = 2*PI*ST/(targetPoint.end_time*targetPoint.end_time);
+			double A = 2*M_PI*ST/(targetPoint.end_time*targetPoint.end_time);
 
-			double s = A*targetPoint.end_time/(2*PI)*(targetPoint.time - targetPoint.end_time/(2*PI)*sin(2*PI/targetPoint.end_time*targetPoint.time));
+			double s = A*targetPoint.end_time/(2*M_PI)*(targetPoint.time - targetPoint.end_time/(2*M_PI)*sin(2*M_PI/targetPoint.end_time*targetPoint.time));
 
 			double Px = s*dx/ST + targetPoint.start_pos(0);
 			double Py = s*dy/ST + targetPoint.start_pos(1);
 			double Pz = s*dz/ST + targetPoint.start_pos(2);
 
 
-			double ds = A*targetPoint.end_time/(2*PI)*(1 - cos(2*PI/targetPoint.end_time*targetPoint.time));
+			double ds = A*targetPoint.end_time/(2*M_PI)*(1 - cos(2*M_PI/targetPoint.end_time*targetPoint.time));
 
 			Vector3d pos = calcKinematics();
 
@@ -670,9 +697,9 @@ void RobotArm::start()
 double RobotArm::calcVel(double target_theta, double start_theta, double end_time, double time, double angle)
 {
 	double d = target_theta - start_theta;
-	double A = 2*PI*d/(end_time*end_time);
-	double s = A*end_time/(2*PI)*(time - end_time/(2*PI)*sin(2*PI/end_time*time));
-	double ds = A*end_time/(2*PI)*(1 - cos(2*PI/end_time*time));
+	double A = 2*M_PI*d/(end_time*end_time);
+	double s = A*end_time/(2*M_PI)*(time - end_time/(2*M_PI)*sin(2*M_PI/end_time*time));
+	double ds = A*end_time/(2*M_PI)*(1 - cos(2*M_PI/end_time*time));
 	double the = s + start_theta;
 		
 	

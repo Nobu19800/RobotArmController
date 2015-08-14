@@ -9,7 +9,7 @@
 #include <vector>
 
 using namespace Eigen;
-const double PI = 3.141592;
+
 
 
 enum MoveType { Joint = 0, Point = 1, };
