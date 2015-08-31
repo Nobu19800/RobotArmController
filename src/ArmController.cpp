@@ -165,12 +165,14 @@ RTC::ReturnCode_t ArmController::onExecute(RTC::UniqueId ec_id)
   m_jpos.data.length(m_ra->axisNum);
   for(int i=0;i < m_ra->axisNum;i++)
 	m_jpos.data[i] = m_ra->theta[i];
+  setTimestamp(m_jpos);
   m_jposOut.write();
 
   double *mp = m_ra->getMotorPosition();
   m_mpos.data.length(m_ra->axisNum);
   for(int i=0;i < m_ra->axisNum;i++)
 	m_mpos.data[i] = mp[i];
+  setTimestamp(m_mpos);
   m_mposOut.write();
 
   return RTC::RTC_OK;
